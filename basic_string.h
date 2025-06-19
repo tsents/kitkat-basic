@@ -41,5 +41,5 @@ public:
     friend bool operator>=(const basicString& lhs, const basicString& rhs);
 
 private:
-    const char* char_data;
+    char* m_char_data;
 };
