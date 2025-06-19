@@ -12,6 +12,11 @@ public:
     basicString(const char*);
 
     /*
+     * This uses basicString(const char*) constructor.
+     */
+    basicString& operator=(const char*);
+
+    /*
      * Deconstructor that frees char_data from the heap.
      */
     ~basicString();

@@ -2,7 +2,7 @@
 #include <iostream>
 
 int main() {
-    basicString s = basicString("Hello!");
+    basicString s = "Hello!";
     std::cout << s << basicString() << std::endl;
     return 0;
 }

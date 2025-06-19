@@ -8,6 +8,12 @@ basicString::basicString(const char* char_data) {
     strcpy(m_char_data, char_data);
 };
 
+basicString& basicString::operator=(const char* char_data) {
+    this->m_char_data = new char[std::strlen(char_data) + 1];
+    strcpy(m_char_data, char_data);
+    return *this;
+}
+
 basicString::~basicString() {
     if (m_char_data != NULL) {
         delete[] m_char_data;
