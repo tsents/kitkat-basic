@@ -9,7 +9,10 @@ basicString::basicString(const char* char_data) {
 };
 
 basicString& basicString::operator=(const char* char_data) {
-    this->m_char_data = new char[std::strlen(char_data) + 1];
+    if (char_data != NULL) {
+        delete[] char_data;
+    }
+    m_char_data = new char[std::strlen(char_data) + 1]; // for the '\0' symbol;
     strcpy(m_char_data, char_data);
     return *this;
 }
