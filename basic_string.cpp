@@ -28,6 +28,25 @@ void safeStrcpy(char* target, const char* source) {
     target[customStrlen(target) + 1] = '\0';
 }
 
+int customStrcmp(const char* lhs, const char* rhs) {
+    if (lhs == NULL && rhs == NULL) {
+        return 0;
+    }
+    if (lhs == NULL) {
+        return -1; // lhs = rhs - 1. thus lhs is smaller.
+    }
+    if (rhs == NULL) {
+        return 1; // Same as before but >.
+    }
+    for (unsigned int i = 0;; i++) { // Does this until finds diff. or char '\0'
+        if (rhs[i] != lhs[i]) {      // This also catches one string ending but other not.
+            return lhs[i] - rhs[i];
+        }
+        if (rhs[i] == '\0') { // This actually means both strings have ended.
+            return 0;
+        }
+    }
+}
 //<<<char* Utilities
 
 //>>>Basic Object Utilities
@@ -95,21 +114,21 @@ basicString operator*(const basicString& base, unsigned int times) {
 }
 
 bool operator==(const basicString& lhs, const basicString& rhs) {
-    return (std::strcmp(lhs.m_char_data, rhs.m_char_data) == 0);
+    return (customStrcmp(lhs.m_char_data, rhs.m_char_data) == 0);
 }
 
 bool operator<(const basicString& lhs, const basicString& rhs) {
-    return (std::strcmp(lhs.m_char_data, rhs.m_char_data) < 0);
+    return (customStrcmp(lhs.m_char_data, rhs.m_char_data) < 0);
 }
 
 bool operator>(const basicString& lhs, const basicString& rhs) {
-    return (std::strcmp(lhs.m_char_data, rhs.m_char_data) > 0);
+    return (customStrcmp(lhs.m_char_data, rhs.m_char_data) > 0);
 }
 
 bool operator>=(const basicString& lhs, const basicString& rhs) {
-    return (std::strcmp(lhs.m_char_data, rhs.m_char_data) >= 0);
+    return (customStrcmp(lhs.m_char_data, rhs.m_char_data) >= 0);
 }
 
 bool operator<=(const basicString& lhs, const basicString& rhs) {
-    return (std::strcmp(lhs.m_char_data, rhs.m_char_data) <= 0);
+    return (customStrcmp(lhs.m_char_data, rhs.m_char_data) <= 0);
 }
