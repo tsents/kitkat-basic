@@ -52,3 +52,16 @@ basicString operator+(const basicString& lhs, const basicString& rhs) {
     new_string.m_char_data = new_char_data;
     return new_string;
 }
+
+basicString operator*(const basicString& base, unsigned int times) {
+    unsigned int base_length = strlen(base.m_char_data);
+    char* new_char_data = new char[base_length * times + 1];
+    for (unsigned int i = 0; i < times; i++) {
+        strcpy(new_char_data + base_length * i, base.m_char_data);
+    }
+
+    // Do this trick, to avoid additional new and copying of string.
+    basicString new_string = basicString();
+    new_string.m_char_data = new_char_data;
+    return new_string;
+}

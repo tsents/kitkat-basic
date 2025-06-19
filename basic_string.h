@@ -39,7 +39,7 @@ public:
     /*
      * Returns a string that is the base string repeated (times) times.
      */
-    friend basicString operator*(const basicString& base, int times);
+    friend basicString operator*(const basicString& base, unsigned int times);
 
     /**
      * Comparision of strings based on lexigraphic ordering. (wrapping strcmp result).

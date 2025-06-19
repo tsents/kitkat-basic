@@ -5,6 +5,6 @@ int main() {
     basicString s = "Hello!";
     s = "Other?";
     basicString another_one = "\n";
-    std::cout << (s + another_one) << std::endl; // No leaks.
+    std::cout << ((s + another_one) * 5) << std::endl; // No leaks.
     return 0;
 }
