@@ -2,20 +2,48 @@
 #include <cstring>
 #include <iostream>
 
+//>>>char* Utilities
+
+unsigned int customStrlen(const char* cstring) { // Tested. customStrlen("Hello!") = 6;
+    if (cstring == NULL) {
+        return 0;
+    }
+    char running_char = cstring[0];
+    unsigned int length = 0;
+    while (running_char != '\0') {
+        length++;
+        running_char = cstring[length];
+    }
+    return length;
+}
+
+void safeStrcpy(char* target, const char* source) {
+    if (source == NULL) {
+        return;
+    }
+    if (target == NULL) {
+        return;
+    }
+    std::memcpy(target, source, customStrlen(source));
+    target[customStrlen(target) + 1] = '\0';
+}
+
+//<<<char* Utilities
+
 //>>>Basic Object Utilities
 basicString::basicString() : m_char_data(NULL){};
 
 basicString::basicString(const char* char_data) {
-    m_char_data = new char[std::strlen(char_data) + 1]; // for the '\0' symbol;
-    strcpy(m_char_data, char_data);
+    m_char_data = new char[customStrlen(char_data) + 1]; // for the '\0' symbol;
+    safeStrcpy(m_char_data, char_data);
 };
 
 basicString& basicString::operator=(const char* char_data) {
     if (m_char_data != NULL) {
         delete[] m_char_data;
     }
-    m_char_data = new char[std::strlen(char_data) + 1]; // for the '\0' symbol;
-    strcpy(m_char_data, char_data);
+    m_char_data = new char[customStrlen(char_data) + 1]; // for the '\0' symbol;
+    safeStrcpy(m_char_data, char_data);
     return *this;
 }
 
@@ -43,9 +71,9 @@ std::ostream& operator<<(std::ostream& os, const basicString& obj) {
 //>>Additional Operators
 
 basicString operator+(const basicString& lhs, const basicString& rhs) {
-    char* new_char_data = new char[strlen(lhs.m_char_data) + strlen(rhs.m_char_data) + 1];
-    strcpy(new_char_data, lhs.m_char_data);
-    strcpy(new_char_data + strlen(lhs.m_char_data), rhs.m_char_data);
+    char* new_char_data = new char[customStrlen(lhs.m_char_data) + customStrlen(rhs.m_char_data) + 1];
+    safeStrcpy(new_char_data, lhs.m_char_data);
+    safeStrcpy(new_char_data + customStrlen(lhs.m_char_data), rhs.m_char_data);
 
     // Do this trick, to avoid additional new and copying of string.
     basicString new_string = basicString();
@@ -54,10 +82,10 @@ basicString operator+(const basicString& lhs, const basicString& rhs) {
 }
 
 basicString operator*(const basicString& base, unsigned int times) {
-    unsigned int base_length = strlen(base.m_char_data);
+    unsigned int base_length = customStrlen(base.m_char_data);
     char* new_char_data = new char[base_length * times + 1];
     for (unsigned int i = 0; i < times; i++) {
-        strcpy(new_char_data + base_length * i, base.m_char_data);
+        safeStrcpy(new_char_data + base_length * i, base.m_char_data);
     }
 
     // Do this trick, to avoid additional new and copying of string.
