@@ -17,6 +17,11 @@ public:
     basicString& operator=(const char*);
 
     /*
+     * Copies using the = operator of const char*. copies the m_char_data as well.
+     */
+    basicString& operator=(const basicString&);
+
+    /*
      * Deconstructor that frees char_data from the heap.
      */
     ~basicString();
