@@ -48,7 +48,7 @@ public:
     friend bool operator<(const basicString& lhs, const basicString& rhs);
     friend bool operator>(const basicString& lhs, const basicString& rhs);
     friend bool operator>=(const basicString& lhs, const basicString& rhs);
-    friend bool operator>=(const basicString& lhs, const basicString& rhs);
+    friend bool operator<=(const basicString& lhs, const basicString& rhs);
 
 private:
     char* m_char_data;

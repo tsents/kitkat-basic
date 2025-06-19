@@ -65,3 +65,23 @@ basicString operator*(const basicString& base, unsigned int times) {
     new_string.m_char_data = new_char_data;
     return new_string;
 }
+
+bool operator==(const basicString& lhs, const basicString& rhs) {
+    return (std::strcmp(lhs.m_char_data, rhs.m_char_data) == 0);
+}
+
+bool operator<(const basicString& lhs, const basicString& rhs) {
+    return (std::strcmp(lhs.m_char_data, rhs.m_char_data) < 0);
+}
+
+bool operator>(const basicString& lhs, const basicString& rhs) {
+    return (std::strcmp(lhs.m_char_data, rhs.m_char_data) > 0);
+}
+
+bool operator>=(const basicString& lhs, const basicString& rhs) {
+    return (std::strcmp(lhs.m_char_data, rhs.m_char_data) >= 0);
+}
+
+bool operator<=(const basicString& lhs, const basicString& rhs) {
+    return (std::strcmp(lhs.m_char_data, rhs.m_char_data) <= 0);
+}
