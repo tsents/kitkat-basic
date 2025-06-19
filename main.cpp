@@ -2,9 +2,9 @@
 #include <iostream>
 
 int main() {
-    basicString s = "Hello!";
-    s = "Other?";
-    basicString another_one = "\n";
-    std::cout << ((s + another_one) * 5) << std::endl; // No leaks.
+    std::cout << (basicString("\n") == basicString("\n")) << std::endl; // Should be true
+    std::cout << (basicString("A") >= basicString("\n")) << std::endl;  // Should be true
+    std::cout << (basicString("AA") <= basicString("A")) << std::endl;  // Should be false. its strictly greater
+    std::cout << (basicString("AA") > basicString("AB")) << std::endl;  // Should be false. its the oppisite.
     return 0;
 }
