@@ -2,7 +2,8 @@
 #include <cstring>
 #include <iostream>
 
-basicString::basicString() : m_char_data(new char[0]){};
+//>>>Basic Object Utilities
+basicString::basicString() : m_char_data(NULL){};
 
 basicString::basicString(const char* char_data) {
     m_char_data = new char[std::strlen(char_data) + 1]; // for the '\0' symbol;
@@ -35,4 +36,19 @@ basicString::~basicString() {
 
 std::ostream& operator<<(std::ostream& os, const basicString& obj) {
     return os << obj.m_char_data; // It is allready implemented for char*.
+}
+
+//<<<Basic Object Utilities
+
+//>>Additional Operators
+
+basicString operator+(const basicString& lhs, const basicString& rhs) {
+    char* new_char_data = new char[strlen(lhs.m_char_data) + strlen(rhs.m_char_data) + 1];
+    strcpy(new_char_data, lhs.m_char_data);
+    strcpy(new_char_data + strlen(lhs.m_char_data), rhs.m_char_data);
+
+    // Do this trick, to avoid additional new and copying of string.
+    basicString new_string = basicString();
+    new_string.m_char_data = new_char_data;
+    return new_string;
 }

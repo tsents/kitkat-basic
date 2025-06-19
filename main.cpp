@@ -3,7 +3,8 @@
 
 int main() {
     basicString s = "Hello!";
-    s = "Other?"; // Causes memleak
-    std::cout << s << basicString() << std::endl;
+    s = "Other?";
+    basicString another_one = "\n";
+    std::cout << (s + another_one) << std::endl; // No leaks.
     return 0;
 }
